@@ -11,10 +11,17 @@ const equipo = [
     { nombre: "Jose Mendes", curso: "4°D", materiaFavorita: "Programación", Rol:"Maquetador UI", foto: "IMG/messi.jpg" },
     { nombre: "Calvin Kerini", curso: "4°D", materiaFavorita: "Programación", Rol:"Desarrollador Frontend", foto: "IMG/blan_1.jpg" }
 ];
+
 const divEquipo = document.getElementById('equipo');
-if (divEquipo) divEquipo.innerHTML = equipo.map(p => `
-    <div class="tarjeta"><img src="${p.foto}" alt="${p.nombre}">
-    <h3>${p.nombre}</h3><p>${p.curso} - ${p.materiaFavorita}</p> <p>${p.Rol}</h3> </p>`).join("");
+if (divEquipo) {
+    divEquipo.innerHTML = equipo.map(p => `
+        <div class="tarjeta">
+            <img src="${p.foto}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p>${p.curso} - ${p.materiaFavorita} - ${p.Rol}</p>
+        </div>
+    `).join("");
+}
 
 // catalogo (servicios.html)
 const servicios = [
