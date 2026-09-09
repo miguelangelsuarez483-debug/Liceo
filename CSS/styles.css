@@ -52,15 +52,49 @@ nav a:hover {
     display: flex !important;
     flex-direction: column;
 }
+
 main {
     flex-grow: 1;
     padding: 20px;
     margin: 10px;
     border: 2px solid #009929;
 }
+
+/* brillo verde animado SOLO para el main de index.html (clase "main-brillo") */
+.main-brillo {
+    border: 2px solid #5ccb5f;
+    border-radius: 10px;
+    animation: glowVerde 2.5s ease-in-out infinite;
+}
+
+@keyframes glowVerde {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(92, 203, 95, 0.4),
+                    0 0 16px rgba(0, 153, 41, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(92, 203, 95, 0.9),
+                    0 0 35px rgba(0, 153, 41, 0.6);
+    }
+}
+
 section {
     margin-bottom: 20px;
 }
+
+/* texto de la sección de bienvenida (#inicio) con más jerarquía */
+#inicio p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+#inicio p:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 .tarjetas {
     display: flex;
     flex-wrap: wrap;
