@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial, sans-serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #121012;
+    color: #5ccb5f;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #121012;
+    padding: 20px;
+}
+
+header h1 {
+    color: #5ccb5f;
+
+    font-size: 38px;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+nav a {
+    color: #009929;
+    text-decoration: none;
+    font-weight: bold;
+}
+nav a:hover {
+    color: #006414;
+}
+#boton_menu {
+    display: none;
+    background-color: #009929;
+    color: #121012;
+    border: none;
+    padding: 8px 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.nav-activo {
+    display: flex !important;
+    flex-direction: column;
+}
+main {
+    flex-grow: 1;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #009929;
+}
+section {
+    margin-bottom: 20px;
+}
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.tarjeta {
+    border: 1px solid #006414;
+    padding: 12px;
+    width: 220px;
+}
+
+/* las fotos del equipo/catálogo siempre quedan del mismo tamaño, sin romper la tarjeta */
+.tarjeta img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 8px;
+}
+
+button {
+    background-color: #5ccb5f;
+    color: #121012;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #009929;
+    color: #121012;
+}
+#resultado {
+    padding: 12px;
+    margin-top: 10px;
+    display: none;
+}
+.exito {
+    background-color: #121012;
+    color: #2E7D32;
+    border: 1px solid #2E7D32;
+}
+.error {
+    background-color: #121012;
+    color: #009929;
+    border: 1px solid #006414;
+}
+form label {
+    display: block;
+    margin-top: 10px;
+}
+form input, form textarea {
+    width: 100%;
+    padding: 6px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #009929;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #006414;
+    color: #121012;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    background-color: #006414;
+}
+.parrafo {
+    color: #5ccb5f;
+}
+
+/* advertencias críticas: la rúbrica exige que el texto se vea en rojo */
+.advertencia-roja {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* barra de estado dinámica en el header de index.html */
+#barra-estado {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+
+/* precio con descuento dentro de una tarjeta del catálogo */
+.precio-descuento {
+    color: #2E7D32;
+    font-weight: bold;
+}
+
+/* boton CTA dentro de una tarjeta de servicio */
+.btn-servicio {
+    margin-top: 8px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #boton_menu {
+        display: block;
+    }
+    nav {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    .tarjeta {
+        width: 100%;
+    }
+}
+
+/* botón especial de index.html, efecto "consola/terminal" con glow verde */
+.btn-descuento {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    border: 1px solid #5ccb5f;
+    box-shadow: 0 0 8px rgba(92, 203, 95, 0.6),
+                0 0 16px rgba(0, 153, 41, 0.4);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-descuento:hover {
+    box-shadow: 0 0 12px rgba(92, 203, 95, 0.9),
+                0 0 24px rgba(0, 153, 41, 0.6);
+    transform: scale(1.03);
+}
+
+/*validación de formularios y calculadora de finanzas */
+/* mensaje de éxito al enviar el formulario de contacto */
+#mensaje-exito {
+    padding: 12px;
+    margin-top: 10px;
+}
+
+/* advertencia amarilla cuando el presupuesto de Ads supera $50.000 */
+.advertencia-amarilla {
+    color: #FFC107;
+    border: 1px solid #FFC107;
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    display: none;
+}
+
+/*VIDEO DE FONDO (header de nosotros/servicios/finanzas/contacto)*/
+.header-video {
+    position: relative;
+    overflow: hidden;
+}
+.video-fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.25;
+}
+.header-contenido {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*VIDEO EMBEBIDO (solo en index.html)*/
+.video-index {
+    margin-top: 15px;
+    max-width: 500px;
+}
+.video-index video {
+    width: 100%;
+    border: 1px solid #009929;
+}
