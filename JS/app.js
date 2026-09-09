@@ -5,11 +5,11 @@ if (botonMenu && nav) botonMenu.addEventListener('click', () => nav.classList.to
 
 // equipo (nosotros.html)
 const equipo = [
-    { nombre: "Miguel Suárez", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/suare.jpeg" },
-    { nombre: "Suárez Miguel", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/n_2.jpg" },
-    { nombre: "Angel Castro", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/n_1.jpg" },
-    { nombre: "Jose Mendes", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/messi.jpg" },
-    { nombre: "Calvin Kerini", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/blan_1.jpg" }
+    { nombre: "Miguel Suárez", curso: "4°D", materiaFavorita: "Programación", Rol:"Ingeniero de Aseguramiento de Calidad (QA)", foto: "IMG/suare.jpeg" },
+    { nombre: "Suárez Miguel", curso: "4°D", materiaFavorita: "Programación", Rol:"Desarrollador Backend (lider)", foto: "IMG/n_2.jpg" },
+    { nombre: "Angel Castro", curso: "4°D", materiaFavorita: "Programación", Rol:"Desarrollador Backend", foto: "IMG/n_1.jpg" },
+    { nombre: "Jose Mendes", curso: "4°D", materiaFavorita: "Programación", Rol:"Maquetador UI", foto: "IMG/messi.jpg" },
+    { nombre: "Calvin Kerini", curso: "4°D", materiaFavorita: "Programación", Rol:"Desarrollador Frontend", foto: "IMG/blan_1.jpg" }
 ];
 const divEquipo = document.getElementById('equipo');
 if (divEquipo) divEquipo.innerHTML = equipo.map(p => `

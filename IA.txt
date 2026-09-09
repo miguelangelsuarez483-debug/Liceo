@@ -1,0 +1,235 @@
+// menu
+const botonMenu = document.getElementById('boton_menu');
+const nav = document.querySelector('nav');
+if (botonMenu && nav) botonMenu.addEventListener('click', () => nav.classList.toggle('nav-activo'));
+
+// equipo (nosotros.html)
+const equipo = [
+    { nombre: "Miguel Suárez", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/suare.jpeg" },
+    { nombre: "Suárez Miguel", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/n_2.jpg" },
+    { nombre: "Angel Castro", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/n_1.jpg" },
+    { nombre: "Jose Mendes", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/messi.jpg" },
+    { nombre: "Calvin Kerini", curso: "4°D", materiaFavorita: "Programación", foto: "IMG/blan_1.jpg" }
+];
+const divEquipo = document.getElementById('equipo');
+if (divEquipo) divEquipo.innerHTML = equipo.map(p => `
+    <div class="tarjeta"><img src="${p.foto}" alt="${p.nombre}">
+    <h3>${p.nombre}</h3><p>${p.curso} - ${p.materiaFavorita}</p></div>`).join("");
+
+// catalogo (servicios.html)
+const servicios = [
+    { nombre: "Organización de eventos", precio: 15000 },
+    { nombre: "Certificados", precio: 9000 },
+    { nombre: "Asesoría administrativa", precio: 12000 }
+];
+const divServicios = document.getElementById('servicios');
+if (divServicios) divServicios.innerHTML = servicios.map(s => `
+    <div class="tarjeta" data-precio="${s.precio}"><h3>${s.nombre}</h3>
+    <p>Precio: $${s.precio.toLocaleString('es-CL')}</p></div>`).join("");
+
+// trivia fórmula matemática
+const preguntas = [
+    { texto: "¿Etiqueta para el contenido principal de una página?", opciones: ["&lt;main&gt;", "&lt;div&gt;", "&lt;meta&gt;"], correcta: 0 },
+    { texto: "¿Propiedad de CSS para el espacio interno de una caja?", opciones: ["margin", "padding", "gap"], correcta: 1 },
+    { texto: "¿Palabra para declarar una constante en JavaScript?", opciones: ["let", "var", "const"], correcta: 2 }
+];
+const divTrivia = document.getElementById('trivia');
+if (divTrivia) divTrivia.innerHTML = preguntas.map((p, i) => `
+    <div class="tarjeta"><p>${i + 1}. ${p.texto}</p>
+    ${p.opciones.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}"> ${o}</label>`).join("")}
+    </div>`).join("");
+
+const formTrivia = document.getElementById('trivia-form');
+if (formTrivia) formTrivia.addEventListener('submit', e => {
+    e.preventDefault();
+    const resultado = document.getElementById('resultado');
+    let respondidas = 0, correctas = 0;
+
+    preguntas.forEach((p, i) => {
+        const marcada = document.querySelector(`input[name="p${i}"]:checked`);
+        if (marcada) {
+            respondidas++;
+            if (Number(marcada.value) === p.correcta) correctas++;
+        }
+    });
+
+    if (respondidas < preguntas.length) {
+        resultado.className = "advertencia-roja";
+        resultado.textContent = "Debes responder todas las preguntas antes de enviar el cuestionario.";
+        resultado.style.display = "block";
+        return;
+    }
+
+    const intentos = JSON.parse(localStorage.getItem("intentosTrivia") || "[]");
+    intentos.push({ fecha: new Date().toLocaleString('es-CL'), puntaje: `${correctas}/${preguntas.length}`, descuento: correctas === preguntas.length ? "Sí" : "No" });
+    localStorage.setItem("intentosTrivia", JSON.stringify(intentos));
+
+    if (correctas === preguntas.length) {
+        resultado.className = "exito";
+        resultado.textContent = "¡Excelente! Certificado disponible. Se aplicó 10% de descuento.";
+        localStorage.setItem("descuento", "0.10");
+        aplicarDescuento();
+    } else {
+        resultado.className = "error";
+        resultado.textContent = `${correctas} de ${preguntas.length} correctas. Intenta de nuevo.`;
+    }
+    resultado.style.display = "block";
+});
+
+function aplicarDescuento() {
+    const descuento = localStorage.getItem("descuento");
+    if (!descuento) return;
+    document.querySelectorAll('.tarjeta[data-precio]').forEach(t => {
+        if (t.querySelector('.precio-descuento')) return;
+        const precioFinal = Math.round(t.dataset.precio * (1 - descuento));
+        t.innerHTML += `<p class="precio-descuento">Con descuento: $${precioFinal.toLocaleString('es-CL')}</p>`;
+    });
+}
+aplicarDescuento();
+
+// barra de estado (index.html)
+const barraEstado = document.getElementById('barra-estado');
+if (barraEstado) {
+    if (localStorage.getItem("adminLogueado") === "true") {
+        barraEstado.className = "exito";
+        barraEstado.textContent = "Bienvenido, Administrador.";
+        barraEstado.style.display = "block";
+    } else if (localStorage.getItem("descuento")) {
+        barraEstado.className = "exito";
+        barraEstado.textContent = "Tienes un 10% de descuento activo por completar la trivia. ¡Ve a Servicios para usarlo!";
+        barraEstado.style.display = "block";
+    }
+}
+
+// login admin + panel (contacto.html) - clase 7
+const formLogin = document.getElementById('login-form');
+if (formLogin) formLogin.addEventListener('submit', e => {
+    e.preventDefault();
+    const usuario = document.getElementById('usuario').value.trim();
+    const clave = document.getElementById('clave').value.trim();
+    const mensajeLogin = document.getElementById('mensaje-login');
+
+    if (usuario === "admin" && clave === "1234") {
+        localStorage.setItem("adminLogueado", "true");
+        document.getElementById('formulario-contacto').style.display = "none";
+        document.getElementById('login-seccion').style.display = "none";
+        document.getElementById('panel-admin').style.display = "block";
+
+        const intentos = JSON.parse(localStorage.getItem("intentosTrivia") || "[]");
+        const cuerpoTabla = document.getElementById('cuerpo-tabla-intentos');
+        cuerpoTabla.innerHTML = intentos.length
+            ? intentos.map(i => `<tr><td>${i.fecha}</td><td>${i.puntaje}</td><td>${i.descuento}</td></tr>`).join("")
+            : `<tr><td colspan="3">Aún no hay intentos registrados.</td></tr>`;
+    } else {
+        mensajeLogin.className = "advertencia-roja";
+        mensajeLogin.textContent = "Usuario o clave incorrectos.";
+    }
+});
+
+// validación del formulario de contacto (clase 8)
+const formContacto = document.getElementById('form-contacto');
+if (formContacto) formContacto.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const correo = document.getElementById('correo').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    document.getElementById('error-nombre').textContent = "";
+    document.getElementById('error-correo').textContent = "";
+    document.getElementById('error-telefono').textContent = "";
+    document.getElementById('error-mensaje').textContent = "";
+
+    let valido = true;
+
+    if (nombre.length === 0) {
+        document.getElementById('error-nombre').textContent = "El nombre es obligatorio.";
+        valido = false;
+    }
+
+    if (correo.length === 0 || !correo.includes("@")) {
+        document.getElementById('error-correo').textContent = "Ingresa un correo válido.";
+        valido = false;
+    }
+
+    if (telefono.length === 0) {
+        document.getElementById('error-telefono').textContent = "El teléfono es obligatorio.";
+        valido = false;
+    } else if (isNaN(telefono)) {
+        document.getElementById('error-telefono').textContent = "El teléfono debe contener solo números.";
+        valido = false;
+    }
+
+    if (mensaje.length < 10) {
+        document.getElementById('error-mensaje').textContent = "El mensaje debe tener al menos 10 caracteres.";
+        valido = false;
+    }
+
+    if (!valido) return;
+
+    const exito = document.getElementById('mensaje-exito');
+    exito.className = "exito";
+    exito.textContent = "¡Mensaje enviado con éxito!";
+    exito.style.display = "block";
+    formContacto.reset();
+});
+
+// calculadora de finanzas y Google Ads (clase 8)
+const formFinanzas = document.getElementById('form-finanzas');
+if (formFinanzas) formFinanzas.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const dominio = document.getElementById('dominio').value.trim();
+    const hosting = document.getElementById('hosting').value.trim();
+    const tarifaHora = document.getElementById('tarifaHora').value.trim();
+    const horas = document.getElementById('horas').value.trim();
+    const cpc = document.getElementById('cpc').value.trim();
+    const clics = document.getElementById('clics').value.trim();
+
+    const errorFinanzas = document.getElementById('error-finanzas');
+    const tabla = document.getElementById('tabla-cotizacion');
+    const advertenciaAds = document.getElementById('advertencia-ads');
+    const btnCtaAds = document.getElementById('btn-cta-ads');
+
+    errorFinanzas.textContent = "";
+
+    if ([dominio, hosting, tarifaHora, horas, cpc, clics].some(v => v === "" || isNaN(v))) {
+        errorFinanzas.textContent = "Todos los campos deben ser números válidos.";
+        tabla.style.display = "none";
+        advertenciaAds.style.display = "none";
+        btnCtaAds.style.display = "none";
+        return;
+    }
+
+    const formatoCLP = n => "$" + Math.round(n).toLocaleString('es-CL');
+
+    const costoCapitalHumano = Number(tarifaHora) * Number(horas);
+    const costoAds = Number(cpc) * Number(clics);
+    const total = Number(dominio) + Number(hosting) + costoCapitalHumano + costoAds;
+
+    document.getElementById('cuerpo-cotizacion').innerHTML = `
+        <tr><td>Dominio (NIC Chile)</td><td>${formatoCLP(dominio)}</td></tr>
+        <tr><td>Hosting</td><td>${formatoCLP(hosting)}</td></tr>
+        <tr><td>Capital humano (${horas} hrs x ${formatoCLP(tarifaHora)})</td><td>${formatoCLP(costoCapitalHumano)}</td></tr>
+        <tr><td>Campaña Google Ads (${clics} clics x ${formatoCLP(cpc)})</td><td>${formatoCLP(costoAds)}</td></tr>
+        <tr><th>Total</th><th>${formatoCLP(total)}</th></tr>
+    `;
+    tabla.style.display = "table";
+
+    if (costoAds > 50000) {
+        advertenciaAds.textContent = "⚠️ Presupuesto de marketing alto para fase de lanzamiento";
+        advertenciaAds.style.display = "block";
+        btnCtaAds.style.display = "block";
+    } else {
+        advertenciaAds.style.display = "none";
+        btnCtaAds.style.display = "none";
+    }
+});
+
+
+
+
+
+
+(y varias de las conexxiones con el dom en el html)
