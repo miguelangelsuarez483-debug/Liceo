@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Finanzas</title>
+        <meta name="author" content="Miguel Suárez">
+        <meta name="description" content="Precios de los servicios del Liceo Comercial, su trivia interactiva y calculadora de presupuesto comercial.">
+
+        <meta name="keywords" content="trivia interactiva liceo, cuestionario programación 
+        chile, juegos de trivia escolar, programación interactiva, 
+        liceo comercial, administración, gestión de eventos, 
+        catálogo de servicios, servicios escolares, certificado de participación, 
+        descuento estudiantil, 10 por ciento de descuento, quiz escolar, preguntas y respuestas, 
+        conocimientos de programación, aprender a programar, código, desarrollo web, html css javascript, 
+        estudiantes, profesores, comunidad educativa, colegio, escuela técnica, finanzas escolares, 
+        precios de servicios, asesoría administrativa, organización de eventos, contacto liceo, 
+        formulario de contacto, equipo desarrollador, proyecto escolar, tarea de programación, 
+        gestión escolar, trivia online, juego educativo, aprendizaje interactivo, tecnología educativa, 
+        sitio web escolar, cuestionario dinámico, evaluación de conocimientos, beneficios y premios, inscripción en línea">
+
+        <link rel="stylesheet" href="CSS/styles.css">
+
+    </head>
+
+    <body>
+
+        <header class="header-video">
+            <video class="video-fondo" autoplay muted loop playsinline>
+                <source src="JS/media/video.mp4" type="video/mp4">
+            </video>
+            <div class="header-contenido">
+                <h1>Liceo Comercial</h1>
+
+                <button id="boton_menu">Menu</button>
+
+                <nav>
+                    <a href="index.html">Inicio</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="finanzas.html">Finanzas</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+
+            <section id="precios">
+                <p>Detalle de precios:</p>
+                <table>
+
+                    <thead>
+                        <tr><th>Servicio</th><th>Precio</th></tr>
+                    </thead>
+
+                    <tbody>
+                        <tr><td>Organización de eventos</td><td>$15.000</td></tr>
+                        <tr><td>Certificados</td><td>$9.000</td></tr>
+                        <tr><td>Asesoría administrativa</td><td>$12.000</td></tr>
+                    </tbody>
+
+                </table>
+
+                <p>¿Ya jugaste la trivia? Recuerda que si obtienes las 3 correctas, este 10% de descuento se aplica automáticamente en la página de <a href="servicios.html" style="color:#5ccb5f;">Servicios</a>.</p>
+            </section>
+
+            <!-- CLASE 8: calculadora de presupuesto comercial y campaña de Google Ads -->
+            <section id="calculadora-finanzas">
+
+                <p>Calculadora de Presupuesto Comercial:</p>
+
+                <form id="form-finanzas">
+                    <label for="dominio">Costo anual dominio (NIC Chile)</label>
+                    <input type="number" id="dominio" value="9990">
+
+                    <label for="hosting">Costo anual hosting</label>
+                    <input type="number" id="hosting" value="35000">
+
+                    <label for="tarifaHora">Tarifa por hora de trabajo (CLP)</label>
+                    <input type="number" id="tarifaHora" value="5000">
+
+                    <label for="horas">Horas totales de desarrollo</label>
+                    <input type="number" id="horas" value="40">
+
+                    <label for="cpc">Costo por Clic (CPC) Google Ads</label>
+                    <input type="number" id="cpc" value="150">
+
+                    <label for="clics">Clics mensuales deseados</label>
+                    <input type="number" id="clics" value="500">
+
+                    <br><br>
+                    <button type="submit">Calcular presupuesto</button>
+                </form>
+
+                <p id="error-finanzas" class="advertencia-roja"></p>
+
+                <table id="tabla-cotizacion" style="display:none;">
+                    <thead><tr><th>Concepto</th><th>Costo</th></tr></thead>
+                    <tbody id="cuerpo-cotizacion"></tbody>
+                </table>
+
+                <p id="advertencia-ads" class="advertencia-amarilla"></p>
+
+                <button id="btn-cta-ads" class="btn-descuento" style="display:none;" onclick="window.location.href='contacto.html'">
+                    ¡Contrata tu campaña de Google Ads ahora!
+                </button>
+
+            </section>
+
+        </main>
+
+
+        <footer>
+            <p class="parrafo">&copy; 2026 Liceo Comercial.</p>
+        </footer>
+
+        <script src="JS/app.js"></script>
+    </body>
+</html>

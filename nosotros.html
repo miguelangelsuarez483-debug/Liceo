@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Liceo Comercial - Nosotros</title>
+        <meta name="author" content="Miguel Suárez">
+        <meta name="description" content="Conoce al equipo desarrollador de la trivia interactiva del Liceo Comercial.">
+
+        <meta name="keywords" content="trivia interactiva liceo, cuestionario programación 
+        chile, juegos de trivia escolar, programación interactiva, 
+        liceo comercial, administración, gestión de eventos, 
+        catálogo de servicios, servicios escolares, certificado de participación, 
+        descuento estudiantil, 10 por ciento de descuento, quiz escolar, preguntas y respuestas, 
+        conocimientos de programación, aprender a programar, código, desarrollo web, html css javascript, 
+        estudiantes, profesores, comunidad educativa, colegio, escuela técnica, finanzas escolares, 
+        precios de servicios, asesoría administrativa, organización de eventos, contacto liceo, 
+        formulario de contacto, equipo desarrollador, proyecto escolar, tarea de programación, 
+        gestión escolar, trivia online, juego educativo, aprendizaje interactivo, tecnología educativa, 
+        sitio web escolar, cuestionario dinámico, evaluación de conocimientos, beneficios y premios, inscripción en línea">
+
+        
+        <link rel="stylesheet" href="CSS/styles.css">
+
+    </head>
+    <body style="background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('IMG/img_fondo_2.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed;">
+
+
+        <header class="header-video">
+            <video class="video-fondo" autoplay muted loop playsinline>
+                <source src="JS/media/video.mp4" type="video/mp4">
+            </video>
+            <div class="header-contenido">
+                <h1>Liceo Comercial</h1>
+
+                <button id="boton_menu">Menu</button>
+
+                <nav>
+                    <a href="index.html">Inicio</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="finanzas.html">Finanzas</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section id="equipo-seccion">
+                <p>El equipo detrás de la trivia interactiva del Liceo Comercial:</p>
+                <!-- el div de abajo se llena solo con el array "equipo" que está en js/app.js -->
+                <!-- (Nombre, Curso, Materia favorita y Foto de cada desarrollador) -->
+                <div id="equipo" class="tarjetas"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p class="parrafo">&copy; 2026 Liceo Comercial.</p>
+        </footer>
+
+        <script src="JS/app.js"></script>
+    </body>
+</html>
