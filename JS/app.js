@@ -14,7 +14,7 @@ const equipo = [
 const divEquipo = document.getElementById('equipo');
 if (divEquipo) divEquipo.innerHTML = equipo.map(p => `
     <div class="tarjeta"><img src="${p.foto}" alt="${p.nombre}">
-    <h3>${p.nombre}</h3><p>${p.curso} - ${p.materiaFavorita}</p></div>`).join("");
+    <h3>${p.nombre}</h3><p>${p.curso} - ${p.materiaFavorita}</p> <p>${p.Rol}</h3> </p>`).join("");
 
 // catalogo (servicios.html)
 const servicios = [
